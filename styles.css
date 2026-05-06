@@ -455,8 +455,28 @@ ul { list-style: none; padding: 0; margin: 0; }
 
 .lanes-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.5rem;
+}
+
+/* Featured lane — spans full width, horizontal layout */
+.lane--featured {
+  grid-column: 1 / -1;
+}
+.lane--featured .lane-card {
+  flex-direction: row;
+}
+.lane--featured .lane-image {
+  width: 52%;
+  flex-shrink: 0;
+  aspect-ratio: unset;
+  min-height: 320px;
+}
+.lane--featured .lane-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 2.2rem;
 }
 
 .lane-card {
@@ -566,6 +586,8 @@ ul { list-style: none; padding: 0; margin: 0; }
 @media (max-width: 980px) {
   .lanes-grid { grid-template-columns: 1fr; gap: 1.25rem; }
   .lane-image { aspect-ratio: 16 / 9; }
+  .lane--featured .lane-card { flex-direction: column; }
+  .lane--featured .lane-image { width: 100%; min-height: unset; aspect-ratio: 16 / 9; }
 }
 
 /* ============================================================
