@@ -1,0 +1,572 @@
+/* =================================================================
+   OMNI AI PROJECT GUIDE — chat widget
+   Palette aligned with the Omni logo (jet, carbon, cyan)
+   ================================================================= */
+
+/* -------- LAUNCHER (floating bubble bottom-right) -------- */
+.chat-launcher {
+  position: fixed;
+  right: clamp(16px, 3vw, 28px);
+  bottom: clamp(16px, 3vw, 28px);
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px 12px 14px;
+  border: 1px solid var(--line-dark, #2a2e35);
+  border-radius: 999px;
+  background: var(--carbon, #14161a);
+  color: var(--chrome, #f2f4f6);
+  font: 600 14px/1 'Trebuchet MS', system-ui, sans-serif;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.25);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+}
+
+.chat-launcher:hover {
+  transform: translateY(-2px);
+  background: #1c1f25;
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.45),
+    0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.chat-launcher .pulse-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--cyan, #5bc8e8);
+  flex: 0 0 auto;
+}
+.chat-launcher .pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--cyan, #5bc8e8);
+  opacity: 0.45;
+  animation: pulse 1.8s ease-out infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(0.6); opacity: 0.5; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.chat-launcher.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+
+/* -------- PANEL (the actual chat window) -------- */
+.chat-panel {
+  position: fixed;
+  right: clamp(16px, 3vw, 28px);
+  bottom: clamp(16px, 3vw, 28px);
+  width: min(420px, calc(100vw - 32px));
+  height: min(640px, calc(100vh - 48px));
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  background: var(--jet, #0a0b0d);
+  border: 1px solid var(--line-dark, #2a2e35);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  transform-origin: bottom right;
+  transform: translateY(20px) scale(0.96);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.22s ease;
+}
+
+.chat-panel.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* Header */
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--carbon, #14161a);
+  border-bottom: 1px solid var(--line-dark, #2a2e35);
+  flex: 0 0 auto;
+}
+.chat-header .avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, #2a8fb0, #0a2a33 70%);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font: 700 14px/1 'Trebuchet MS', system-ui, sans-serif;
+  flex: 0 0 auto;
+  border: 1px solid rgba(91, 200, 232, 0.4);
+}
+.chat-header .meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.chat-header .title {
+  font: 600 14px/1.2 'Trebuchet MS', system-ui, sans-serif;
+  color: var(--chrome, #f2f4f6);
+  letter-spacing: 0.01em;
+}
+.chat-header .status {
+  font: 500 11px/1 system-ui, sans-serif;
+  color: var(--ink-soft, #c7ccd2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.chat-header .status .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #5bc8e8;
+  box-shadow: 0 0 8px rgba(91, 200, 232, 0.6);
+}
+.chat-header .close {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--ink-soft, #c7ccd2);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.chat-header .close:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--chrome, #f2f4f6);
+}
+
+/* Messages */
+.chat-messages {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 18px 16px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #2a2e35 transparent;
+}
+.chat-messages::-webkit-scrollbar {
+  width: 8px;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #2a2e35;
+  border-radius: 4px;
+}
+
+.msg {
+  max-width: 88%;
+  padding: 11px 14px;
+  border-radius: 14px;
+  font: 400 14px/1.5 system-ui, -apple-system, sans-serif;
+  letter-spacing: 0.005em;
+  word-wrap: break-word;
+  animation: msgIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.msg-bot {
+  align-self: flex-start;
+  background: #1e2126;
+  color: var(--chrome, #f2f4f6);
+  border: 1px solid #2a2e35;
+  border-bottom-left-radius: 4px;
+}
+.msg-user {
+  align-self: flex-end;
+  background: var(--cyan-deep, #2a8fb0);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+/* Typing indicator */
+.msg-typing {
+  align-self: flex-start;
+  background: #1e2126;
+  border: 1px solid #2a2e35;
+  border-bottom-left-radius: 4px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  display: inline-flex;
+  gap: 4px;
+}
+.msg-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-soft, #c7ccd2);
+  animation: typingDot 1.2s infinite ease-in-out;
+}
+.msg-typing span:nth-child(2) { animation-delay: 0.15s; }
+.msg-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Quick reply chips */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0 8px;
+  align-self: stretch;
+}
+.chip {
+  appearance: none;
+  border: 1px solid #2a8fb0;
+  background: rgba(42, 143, 176, 0.08);
+  color: var(--chrome, #f2f4f6);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font: 500 13px/1.2 system-ui, sans-serif;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.1s ease;
+  text-align: left;
+}
+.chip:hover {
+  background: rgba(91, 200, 232, 0.18);
+  border-color: var(--cyan, #5bc8e8);
+}
+.chip:active {
+  transform: scale(0.97);
+}
+
+/* Input area */
+.chat-input {
+  flex: 0 0 auto;
+  padding: 12px 12px 14px;
+  border-top: 1px solid var(--line-dark, #2a2e35);
+  background: var(--carbon, #14161a);
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+.chat-input textarea {
+  flex: 1 1 auto;
+  resize: none;
+  min-height: 40px;
+  max-height: 120px;
+  padding: 10px 12px;
+  border: 1px solid #2a2e35;
+  border-radius: 10px;
+  background: #1e2126;
+  color: var(--chrome, #f2f4f6);
+  font: 400 14px/1.4 system-ui, sans-serif;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.chat-input textarea:focus {
+  border-color: var(--cyan, #5bc8e8);
+}
+.chat-input textarea::placeholder {
+  color: #6b7079;
+}
+.chat-input .send-btn {
+  appearance: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--cyan, #5bc8e8);
+  color: var(--jet, #0a0b0d);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s ease, transform 0.1s ease;
+  flex: 0 0 auto;
+}
+.chat-input .send-btn:hover {
+  background: var(--cyan-bright, #8fdbee);
+}
+.chat-input .send-btn:active {
+  transform: scale(0.95);
+}
+.chat-input .send-btn:disabled {
+  background: #3a3e45;
+  color: #6b7079;
+  cursor: not-allowed;
+}
+
+/* Footer disclaimer */
+.chat-footer-note {
+  font: 500 10px/1.3 system-ui, sans-serif;
+  color: #6b7079;
+  text-align: center;
+  padding: 0 12px 10px;
+  background: var(--carbon, #14161a);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Booking card (Turn 7) */
+.booking-card {
+  align-self: stretch;
+  margin: 4px 0 8px;
+  background: linear-gradient(135deg, rgba(91, 200, 232, 0.08), rgba(42, 143, 176, 0.05));
+  border: 1px solid rgba(91, 200, 232, 0.3);
+  border-radius: 14px;
+  padding: 16px;
+  animation: msgIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.booking-card h4 {
+  font: 600 14px/1.3 'Trebuchet MS', system-ui, sans-serif;
+  color: var(--chrome, #f2f4f6);
+  margin: 0 0 10px;
+  letter-spacing: 0.01em;
+}
+.booking-card .slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.booking-card .slots-grid-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+@media (max-width: 460px) {
+  .booking-card .slots-grid-3 { grid-template-columns: 1fr 1fr; }
+}
+.booking-card .slot {
+  appearance: none;
+  border: 1px solid #2a8fb0;
+  background: rgba(10, 11, 13, 0.4);
+  color: var(--chrome, #f2f4f6);
+  padding: 10px 12px;
+  border-radius: 8px;
+  font: 500 12px/1.4 system-ui, sans-serif;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.booking-card .slot strong {
+  display: block;
+  font: 600 13px/1.3 system-ui, sans-serif;
+  color: var(--cyan, #5bc8e8);
+  margin-bottom: 3px;
+}
+.booking-card .slot:hover {
+  background: rgba(91, 200, 232, 0.1);
+  border-color: var(--cyan, #5bc8e8);
+}
+.booking-card .more-times,
+.booking-card .none-work {
+  width: 100%;
+  margin-top: 8px;
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: var(--cyan, #5bc8e8);
+  font: 500 12px/1.2 system-ui, sans-serif;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+.booking-card .more-times:hover,
+.booking-card .none-work:hover {
+  background: rgba(91, 200, 232, 0.08);
+}
+.booking-card .none-work {
+  color: var(--ink-soft, #c7ccd2);
+  font-size: 11px;
+  margin-top: 2px;
+}
+.booking-card .none-work:hover {
+  color: var(--chrome, #f2f4f6);
+}
+
+/* -------- QUICK-BOOK PLATFORM PICKER (Zoom / Google Meet / Phone) -------- */
+.qb-platform-card .platform-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.platform-opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(91, 200, 232, 0.04);
+  border: 1px solid var(--line-dark, #2a2e35);
+  border-radius: 10px;
+  color: var(--chrome, #f2f4f6);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.platform-opt:hover:not(:disabled) {
+  background: rgba(91, 200, 232, 0.1);
+  border-color: var(--cyan, #5bc8e8);
+  transform: translateY(-1px);
+}
+.platform-opt:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.platform-opt.selected {
+  background: rgba(91, 200, 232, 0.18);
+  border-color: var(--cyan, #5bc8e8);
+  opacity: 1;
+}
+.platform-icon {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--graphite, #1e2126);
+  border-radius: 8px;
+  flex: 0 0 auto;
+}
+.platform-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.3;
+}
+.platform-text strong {
+  font-size: 14px;
+  color: var(--chrome, #f2f4f6);
+  font-weight: 600;
+}
+.platform-text em {
+  font-size: 12px;
+  font-style: normal;
+  color: var(--ink-soft, #c7ccd2);
+}
+
+/* -------- QUICK-BOOK CONFIRMATION CARD -------- */
+.qb-confirm-card .qb-summary {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  background: rgba(91, 200, 232, 0.05);
+  border: 1px solid var(--line-dark, #2a2e35);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.qb-summary li {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+}
+.qb-summary li span {
+  color: var(--ink-soft, #c7ccd2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 11px;
+  font-weight: 500;
+  flex: 0 0 auto;
+}
+.qb-summary li strong {
+  color: var(--chrome, #f2f4f6);
+  font-weight: 600;
+  text-align: right;
+  font-size: 13px;
+}
+.qb-submit {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--cyan, #5bc8e8);
+  color: var(--jet, #0a0b0d);
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-bottom: 6px;
+}
+.qb-submit:hover:not(:disabled) {
+  background: var(--cyan-bright, #8fdbee);
+  transform: translateY(-1px);
+}
+.qb-submit:disabled {
+  opacity: 0.7;
+  cursor: default;
+  transform: none;
+}
+.qb-edit {
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  color: var(--ink-soft, #c7ccd2);
+  border: 1px solid var(--line-dark, #2a2e35);
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.qb-edit:hover:not(:disabled) {
+  color: var(--chrome, #f2f4f6);
+  background: rgba(91, 200, 232, 0.05);
+}
+.qb-edit:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Selected slot highlight */
+.booking-card .slot.selected {
+  background: rgba(91, 200, 232, 0.18);
+  border-color: var(--cyan, #5bc8e8);
+  opacity: 1 !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 540px) {
+  .chat-panel {
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
+  .chat-launcher {
+    padding: 12px 16px 12px 14px;
+    font-size: 13px;
+  }
+}

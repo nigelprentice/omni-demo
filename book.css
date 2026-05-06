@@ -1,0 +1,328 @@
+/* ============================================================
+   BOOK PAGE — standalone consult booking
+   Mirrors Omni palette + chatbot booking-card slot styling
+   ============================================================ */
+
+.book-body {
+  background: var(--jet, #0a0b0d);
+  color: var(--chrome, #f2f4f6);
+  min-height: 100vh;
+}
+
+/* ---------- HERO ---------- */
+.book-hero {
+  padding: 96px 0 32px;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(91, 200, 232, 0.10), transparent 55%),
+    radial-gradient(ellipse at 80% 10%, rgba(42, 143, 176, 0.10), transparent 60%),
+    var(--jet, #0a0b0d);
+  border-bottom: 1px solid rgba(91, 200, 232, 0.12);
+}
+.book-h1 {
+  font: 700 clamp(28px, 4.4vw, 44px)/1.12 'Trebuchet MS', system-ui, sans-serif;
+  letter-spacing: -0.01em;
+  margin: 10px 0 14px;
+  color: var(--chrome, #f2f4f6);
+}
+.book-sub {
+  font: 400 17px/1.55 Calibri, system-ui, sans-serif;
+  color: var(--ink-soft, #c7ccd2);
+  max-width: 640px;
+  margin: 0;
+}
+
+/* ---------- SHELL ---------- */
+.book-section { padding: 32px 0 80px; }
+.book-shell {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+/* ---------- FORM ---------- */
+.book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.book-step {
+  background: var(--carbon, #14161a);
+  border: 1px solid var(--steel, #2a2e35);
+  border-radius: 14px;
+  padding: 24px 24px 22px;
+  margin: 0;
+  position: relative;
+}
+.book-step legend.step-num {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 4px;
+  margin-left: 8px;
+  font: 600 14px/1 'Trebuchet MS', system-ui, sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft, #c7ccd2);
+}
+.book-step legend.step-num .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(91, 200, 232, 0.12);
+  border: 1px solid var(--cyan-deep, #2a8fb0);
+  color: var(--cyan, #5bc8e8);
+  font: 700 12px/1 'Trebuchet MS', system-ui, sans-serif;
+  letter-spacing: 0;
+}
+.step-help {
+  font: 400 13px/1.5 Calibri, system-ui, sans-serif;
+  color: var(--ink-soft, #c7ccd2);
+  margin: 6px 0 14px;
+}
+
+/* ---------- FIELDS ---------- */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+@media (max-width: 620px) {
+  .grid-2 { grid-template-columns: 1fr; }
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field-label {
+  font: 600 12px/1.2 'Trebuchet MS', system-ui, sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-soft, #c7ccd2);
+}
+.field input,
+.field select,
+.field textarea {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  background: var(--graphite, #1e2126);
+  border: 1px solid var(--steel, #2a2e35);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font: 400 15px/1.4 Calibri, system-ui, sans-serif;
+  color: var(--chrome, #f2f4f6);
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+.field textarea { resize: vertical; min-height: 96px; }
+.field select {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%235bc8e8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+.field input::placeholder,
+.field textarea::placeholder {
+  color: rgba(199, 204, 210, 0.45);
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--cyan, #5bc8e8);
+  background: #181b21;
+  box-shadow: 0 0 0 3px rgba(91, 200, 232, 0.18);
+}
+.field input:invalid:not(:placeholder-shown),
+.field textarea:invalid:not(:placeholder-shown) {
+  border-color: #ff6b6b;
+}
+
+/* ---------- TIME-SLOT CARD (mirrors chatbot.css booking-card) ---------- */
+.booking-card {
+  margin: 8px 0 4px;
+  background: var(--graphite, #1e2126);
+  border: 1px solid var(--steel, #2a2e35);
+  border-radius: 12px;
+  padding: 16px 16px 14px;
+}
+.booking-card h4 {
+  font: 600 14px/1.3 'Trebuchet MS', system-ui, sans-serif;
+  color: var(--chrome, #f2f4f6);
+  margin: 0 0 12px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.booking-card .slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.booking-card .slots-grid-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+@media (max-width: 540px) {
+  .booking-card .slots-grid-3 { grid-template-columns: 1fr 1fr; }
+}
+.booking-card .slot {
+  appearance: none;
+  border: 1px solid var(--cyan-deep, #2a8fb0);
+  background: rgba(91, 200, 232, 0.04);
+  color: var(--chrome, #f2f4f6);
+  border-radius: 8px;
+  padding: 10px 12px;
+  text-align: left;
+  cursor: pointer;
+  font: 500 12px/1.3 Calibri, system-ui, sans-serif;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.booking-card .slot strong {
+  display: block;
+  font: 600 13px/1.3 system-ui, sans-serif;
+  color: var(--cyan, #5bc8e8);
+  margin-bottom: 3px;
+  letter-spacing: 0.01em;
+}
+.booking-card .slot:hover {
+  background: rgba(91, 200, 232, 0.10);
+  border-color: var(--cyan, #5bc8e8);
+}
+.booking-card .slot.selected {
+  background: rgba(91, 200, 232, 0.20);
+  border-color: var(--cyan, #5bc8e8);
+  box-shadow: 0 0 0 2px rgba(91, 200, 232, 0.25);
+}
+.booking-card .slot.selected strong { color: var(--cyan-bright, #8fdbee); }
+.booking-card .more-times,
+.booking-card .none-work {
+  width: 100%;
+  margin-top: 10px;
+  appearance: none;
+  background: transparent;
+  border: 1px dashed rgba(91, 200, 232, 0.45);
+  color: var(--cyan, #5bc8e8);
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  font: 500 12px/1.2 Calibri, system-ui, sans-serif;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.booking-card .none-work {
+  color: var(--ink-soft, #c7ccd2);
+  font-size: 11px;
+  border-color: rgba(199, 204, 210, 0.22);
+  margin-top: 6px;
+}
+.booking-card .more-times:hover,
+.booking-card .none-work:hover {
+  background: rgba(91, 200, 232, 0.08);
+  color: var(--chrome, #f2f4f6);
+  border-color: var(--cyan, #5bc8e8);
+}
+.booking-card.tbd-mode {
+  border-color: var(--cyan-deep, #2a8fb0);
+  background: rgba(42, 143, 176, 0.08);
+}
+.booking-card .tbd-msg {
+  font: 500 13px/1.5 Calibri, system-ui, sans-serif;
+  color: var(--chrome, #f2f4f6);
+  margin: 4px 0 0;
+}
+.booking-card .tbd-msg strong { color: var(--cyan, #5bc8e8); }
+
+/* ---------- ACTIONS ---------- */
+.book-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  padding-top: 4px;
+}
+.btn-cta-lg {
+  font-size: 16px;
+  padding: 16px 24px;
+  border-radius: 10px;
+  width: 100%;
+}
+.book-fineprint {
+  font: 400 12px/1.5 Calibri, system-ui, sans-serif;
+  color: var(--ink-faint, #8a9099);
+  text-align: center;
+  margin: 0;
+}
+.form-error {
+  font: 500 13px/1.4 Calibri, system-ui, sans-serif;
+  color: #ff8585;
+  background: rgba(255, 107, 107, 0.08);
+  border: 1px solid rgba(255, 107, 107, 0.35);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 0;
+  text-align: center;
+}
+
+/* Honeypot */
+.hp {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ---------- CONFIRMATION ---------- */
+.book-confirm {
+  background: var(--carbon, #14161a);
+  border: 1px solid rgba(91, 200, 232, 0.35);
+  border-radius: 14px;
+  padding: 40px 28px 32px;
+  text-align: center;
+  box-shadow: 0 0 0 4px rgba(91, 200, 232, 0.08);
+}
+.confirm-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+.book-confirm .book-h1 { margin-top: 6px; }
+.book-confirm .book-sub { margin: 8px auto 22px; }
+
+.confirm-summary {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 22px;
+  max-width: 520px;
+  text-align: left;
+  border: 1px solid var(--steel, #2a2e35);
+  border-radius: 10px;
+  background: var(--graphite, #1e2126);
+  overflow: hidden;
+}
+.confirm-summary li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+  font: 400 14px/1.4 Calibri, system-ui, sans-serif;
+  border-top: 1px solid rgba(42, 46, 53, 0.6);
+}
+.confirm-summary li:first-child { border-top: 0; }
+.confirm-summary li .k {
+  color: var(--ink-soft, #c7ccd2);
+  font: 600 12px/1.4 'Trebuchet MS', system-ui, sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  flex: 0 0 38%;
+}
+.confirm-summary li .v {
+  color: var(--chrome, #f2f4f6);
+  text-align: right;
+  flex: 1 1 auto;
+  word-break: break-word;
+}
+.confirm-summary li .v.cyan { color: var(--cyan, #5bc8e8); font-weight: 600; }

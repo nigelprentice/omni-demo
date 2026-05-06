@@ -1,0 +1,342 @@
+/* ============================================================
+   HILL COUNTRY WARM PALETTE — shared by Additions + Major Renos
+   Scoped via `.hc-page` on <body>. Overrides the cyan/jet brand
+   palette only on these two lane pages, while inheriting layout
+   tokens from ../styles.css and structural classes from custom-builds.css.
+
+   PALETTE
+   - cream       #FAF6EE  (page background, light surfaces)
+   - parchment   #F0E8D6  (alt light surface)
+   - limestone   #E2D5B5  (warm card surface, divider)
+   - sand        #C8B58E  (mid-tone)
+   - bronze      #8B5A2B  (primary accent — replaces cyan)
+   - bronze-dp   #6B4319  (deep accent, hover)
+   - bronze-br   #C18A4A  (bright accent on dark)
+   - moss        #4A5D3A  (deep green — secondary accent)
+   - moss-dp     #2F3E26  (very deep green, dark surface)
+   - oak         #2A2620  (warm dark — replaces jet/carbon)
+   - cocoa       #3D362C  (warm dark surface — replaces graphite)
+   - bark        #524739  (dark border)
+   - ink         #2A2620  (body text on light)
+   - ink-warm    #5A4D3D  (muted text on light)
+   - ink-faint-w #8A7A66  (faint text on light)
+   - ink-soft-w  #D9CFB8  (soft text on dark)
+   ============================================================ */
+
+.hc-page {
+  /* Override the global tokens used by .cb-* classes */
+  --pearl:      #FAF6EE;
+  --silver:     #F0E8D6;
+  --mist:       #E2D5B5;
+  --line-light: #DCCFB0;
+  --line-dark:  #524739;
+
+  /* Dark surfaces — warm instead of jet/carbon */
+  --jet:        #2A2620;
+  --carbon:     #3D362C;
+  --graphite:   #4A4135;
+  --steel:      #524739;
+
+  /* Accents — bronze replaces cyan, moss is the secondary */
+  --cyan:        #C18A4A;   /* bronze-br on dark surfaces */
+  --cyan-bright: #D9A668;
+  --cyan-deep:   #8B5A2B;   /* bronze on light surfaces */
+  --cyan-ink:    #FAF6EE;
+
+  /* Type colors */
+  --ink:        #2A2620;
+  --ink-muted:  #5A4D3D;
+  --ink-faint:  #8A7A66;
+  --chrome:     #FAF6EE;
+  --ink-soft:   #D9CFB8;
+
+  /* New tokens specific to Hill Country */
+  --hc-cream:     #FAF6EE;
+  --hc-parchment: #F0E8D6;
+  --hc-limestone: #E2D5B5;
+  --hc-sand:      #C8B58E;
+  --hc-bronze:    #8B5A2B;
+  --hc-bronze-dp: #6B4319;
+  --hc-bronze-br: #C18A4A;
+  --hc-moss:      #4A5D3A;
+  --hc-moss-dp:   #2F3E26;
+  --hc-oak:       #2A2620;
+}
+
+/* ============================================================
+   GLOBAL TWEAKS — header + footer + buttons feel warmer
+   ============================================================ */
+.hc-page .site-header {
+  background: rgba(250, 246, 238, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--hc-limestone);
+}
+.hc-page .site-header.is-scrolled {
+  box-shadow: 0 1px 24px rgba(42, 38, 32, 0.06);
+}
+.hc-page .site-header .nav a {
+  color: var(--hc-oak);
+}
+.hc-page .site-header .nav a:hover {
+  color: var(--hc-bronze);
+}
+.hc-page .site-footer {
+  background: var(--hc-oak);
+  color: var(--hc-cream);
+  border-top: 4px solid var(--hc-bronze);
+}
+.hc-page .site-footer .footer-tag {
+  color: var(--hc-bronze-br);
+}
+
+/* CTA buttons — bronze on light, bronze-bright on dark */
+.hc-page .btn-cta {
+  background: var(--hc-bronze);
+  color: var(--hc-cream);
+  border-color: var(--hc-bronze);
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04), 0 4px 14px -4px rgba(139, 90, 43, 0.4);
+}
+.hc-page .btn-cta:hover {
+  background: var(--hc-bronze-dp);
+  border-color: var(--hc-bronze-dp);
+  color: var(--hc-cream);
+}
+.hc-page .btn-ghost {
+  border-color: var(--hc-bronze);
+  color: var(--hc-bronze);
+}
+.hc-page .btn-ghost:hover {
+  background: var(--hc-bronze);
+  color: var(--hc-cream);
+}
+.hc-page .btn-ghost-light {
+  border-color: rgba(250, 246, 238, 0.5);
+  color: var(--hc-cream);
+}
+.hc-page .btn-ghost-light:hover {
+  background: var(--hc-cream);
+  color: var(--hc-oak);
+}
+
+/* Eyebrow palette swap */
+.hc-page .eyebrow,
+.hc-page .eyebrow-cyan { color: var(--hc-bronze); }
+.hc-page .eyebrow-light { color: var(--hc-bronze-br); }
+.hc-page .cyan { color: var(--hc-bronze); }
+.hc-page .cyan-deep { color: var(--hc-moss); }
+
+/* ============================================================
+   PAGE-SPECIFIC SECTION REFINEMENTS
+   ============================================================ */
+
+/* Main page body — warm cream */
+.hc-page main { background: var(--hc-cream); }
+
+/* Section heads */
+.hc-page .cb-h2 { color: var(--hc-oak); }
+.hc-page .cb-h2 .cyan-deep { color: var(--hc-moss); }
+.hc-page .cb-h2 .cyan { color: var(--hc-bronze); }
+.hc-page .cb-h2--inverse { color: var(--hc-cream); }
+.hc-page .cb-section-sub { color: var(--ink-muted); }
+.hc-page .cb-section-sub--inverse { color: var(--hc-limestone); }
+
+/* HERO — keep the dark overlay but warm it up
+   NOTE: hero imagery on warm-palette pages is bronze/sunset-heavy, so
+   we lean on a stronger scrim and a brighter accent than the rest of
+   the page uses, otherwise the eyebrow + accented words disappear into
+   the sky. */
+.hc-page .cb-hero { color: var(--hc-cream); }
+.hc-page .cb-hero-shade {
+  background:
+    linear-gradient(180deg, rgba(20,16,12,0.88) 0%, rgba(20,16,12,0.74) 40%, rgba(20,16,12,0.96) 100%),
+    linear-gradient(90deg, rgba(20,16,12,0.94) 0%, rgba(20,16,12,0.86) 50%, rgba(20,16,12,0.62) 80%, rgba(20,16,12,0.40) 100%);
+}
+.hc-page .cb-hero-eyebrow {
+  color: #FBE9C0;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.95), 0 2px 14px rgba(0,0,0,0.85), 0 0 28px rgba(0,0,0,0.6);
+}
+.hc-page .cb-hero-h1 {
+  text-shadow: 0 2px 18px rgba(0,0,0,0.8), 0 0 32px rgba(0,0,0,0.4);
+}
+.hc-page .cb-hero-h1 .cyan {
+  color: #FFFFFF;
+  text-shadow: 0 2px 18px rgba(0,0,0,0.8), 0 0 32px rgba(0,0,0,0.5);
+}
+.hc-page .cb-hero-sub {
+  text-shadow: 0 1px 12px rgba(0,0,0,0.75);
+}
+.hc-page .cb-hero-trust {
+  color: var(--hc-limestone);
+  text-shadow: 0 1px 10px rgba(0,0,0,0.7);
+}
+.hc-page .cb-hero-trust .cyan { color: #F4DCA8; }
+
+/* PROMISE STRIP */
+.hc-page .cb-promise {
+  background: var(--hc-cream);
+  border-bottom: 1px solid var(--hc-limestone);
+}
+.hc-page .cb-promise-num {
+  color: var(--hc-bronze);
+  border-color: var(--hc-bronze);
+  background: rgba(139, 90, 43, 0.06);
+}
+.hc-page .cb-promise-item h3 { color: var(--hc-oak); }
+.hc-page .cb-promise-item p { color: var(--ink-muted); }
+
+/* PILLARS — limestone surface, ivory cards */
+.hc-page .cb-pillars { background: var(--hc-parchment); }
+.hc-page .cb-pillar {
+  background: var(--hc-cream);
+  border-color: var(--hc-limestone);
+}
+.hc-page .cb-pillar:hover {
+  box-shadow: 0 18px 40px -20px rgba(139, 90, 43, 0.22);
+}
+.hc-page .cb-pillar h3 { color: var(--hc-oak); }
+.hc-page .cb-pillar p  { color: var(--ink-muted); }
+
+/* COMPARE — deep-moss dark surface instead of jet */
+.hc-page .cb-compare {
+  background: var(--hc-moss-dp);
+  color: var(--hc-cream);
+}
+.hc-page .cb-compare-col {
+  background: rgba(0, 0, 0, 0.20);
+  border-color: rgba(218, 198, 156, 0.18);
+}
+.hc-page .cb-compare-col--bad { border-color: rgba(192, 92, 78, 0.32); }
+.hc-page .cb-compare-col--good { border-color: rgba(193, 138, 74, 0.45); }
+.hc-page .cb-compare-col--bad .cb-compare-tag {
+  color: #E89C8E;
+  border-color: rgba(192, 92, 78, 0.55);
+}
+.hc-page .cb-compare-col--good .cb-compare-tag {
+  color: var(--hc-bronze-br);
+  border-color: rgba(193, 138, 74, 0.6);
+}
+.hc-page .cb-compare-col h3 { color: var(--hc-cream); }
+.hc-page .cb-compare-col li {
+  color: var(--hc-limestone);
+  border-bottom-color: rgba(218, 198, 156, 0.12);
+}
+.hc-page .cb-compare-col--bad li::before { color: #E89C8E; }
+.hc-page .cb-compare-col--good li::before { color: var(--hc-bronze-br); }
+.hc-page .cb-compare-end { color: var(--hc-limestone); }
+
+/* GALLERY — cream surface */
+.hc-page .cb-gallery { background: var(--hc-cream); }
+.hc-page .cb-gallery-item { background: var(--hc-limestone); }
+.hc-page .cb-gallery-item figcaption {
+  background: linear-gradient(180deg, rgba(42,38,32,0) 0%, rgba(42,38,32,0.82) 100%);
+  color: var(--hc-cream);
+}
+
+/* ANCHOR — parchment surface */
+.hc-page .cb-anchor { background: var(--hc-parchment); }
+.hc-page .cb-anchor-img-tag {
+  background: var(--hc-bronze);
+  color: var(--hc-cream);
+}
+.hc-page .cb-anchor-quote-attr { color: var(--ink-muted); }
+.hc-page .cb-anchor-bullets li { color: var(--ink-muted); }
+.hc-page .cb-anchor-bullets li::before { color: var(--hc-bronze); }
+.hc-page .cb-anchor-bullets li strong { color: var(--hc-oak); }
+.hc-page .cb-anchor-meta {
+  border-top-color: var(--hc-limestone);
+  color: var(--ink-muted);
+}
+
+/* SCOPE BANDS */
+.hc-page .cb-scope {
+  background: var(--hc-cream);
+  border-bottom-color: var(--hc-limestone);
+}
+.hc-page .cb-scope-band {
+  background: #FFFCF5;
+  border-color: var(--hc-limestone);
+}
+.hc-page .cb-scope-band:hover {
+  border-color: var(--hc-bronze);
+  box-shadow: 0 18px 40px -22px rgba(139, 90, 43, 0.28);
+}
+.hc-page .cb-scope-band--mid {
+  border-color: var(--hc-bronze);
+  box-shadow: 0 14px 36px -20px rgba(139, 90, 43, 0.32);
+}
+.hc-page .cb-scope-band--mid::before {
+  background: var(--hc-bronze);
+  color: var(--hc-cream);
+}
+.hc-page .cb-scope-band-label { color: var(--hc-bronze); }
+.hc-page .cb-scope-band h3 { color: var(--hc-oak); }
+.hc-page .cb-scope-band-sf {
+  color: var(--ink-muted);
+  border-bottom-color: var(--hc-limestone);
+}
+.hc-page .cb-scope-band li { color: var(--ink-muted); }
+.hc-page .cb-scope-band li::before { color: var(--hc-bronze); }
+.hc-page .cb-scope-note { color: var(--ink-muted); }
+.hc-page .cb-scope-note strong { color: var(--hc-oak); }
+
+/* PROCESS — warm dark surface (oak), moss accent stripe */
+.hc-page .cb-process {
+  background: var(--hc-oak);
+  color: var(--hc-cream);
+  position: relative;
+}
+.hc-page .cb-process::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--hc-bronze) 30%, var(--hc-bronze) 70%, transparent);
+}
+.hc-page .cb-process-steps > li {
+  background: var(--hc-cocoa, #3D362C);
+  border-color: rgba(218, 198, 156, 0.14);
+}
+.hc-page .cb-process-steps > li:hover {
+  border-color: var(--hc-bronze-br);
+}
+.hc-page .cb-step-num { color: var(--hc-bronze-br); }
+.hc-page .cb-process-steps h3 { color: var(--hc-cream); }
+.hc-page .cb-step-time { color: var(--hc-limestone); }
+.hc-page .cb-process-steps p { color: var(--hc-limestone); }
+
+/* FAQ — parchment surface, cream items */
+.hc-page .cb-faq { background: var(--hc-parchment); }
+.hc-page .cb-faq-item {
+  background: var(--hc-cream);
+  border-color: var(--hc-limestone);
+}
+.hc-page .cb-faq-item[open] { border-color: var(--hc-bronze); }
+.hc-page .cb-faq-item summary { color: var(--hc-oak); }
+.hc-page .cb-faq-icon {
+  background: var(--hc-limestone);
+  color: var(--hc-oak);
+}
+.hc-page .cb-faq-item[open] .cb-faq-icon {
+  background: var(--hc-bronze);
+  color: var(--hc-cream);
+}
+.hc-page .cb-faq-body { color: var(--ink-muted); }
+
+/* FINAL CTA — moss-deep dark with bronze halo */
+.hc-page .cb-cta { background: var(--hc-moss-dp); }
+.hc-page .cb-cta-card {
+  background: linear-gradient(155deg, #3D4A30 0%, var(--hc-moss-dp) 100%);
+  border-color: rgba(218, 198, 156, 0.18);
+}
+.hc-page .cb-cta-card::before {
+  background: radial-gradient(closest-side, rgba(193, 138, 74, 0.22), transparent 70%);
+}
+.hc-page .cb-cta-h2 { color: var(--hc-cream); }
+.hc-page .cb-cta-sub { color: var(--hc-limestone); }
+.hc-page .cb-cta-meta { color: var(--hc-limestone); }
+.hc-page .cb-cta-trust {
+  color: var(--hc-limestone);
+  border-top-color: rgba(218, 198, 156, 0.16);
+}
