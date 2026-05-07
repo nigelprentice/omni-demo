@@ -87,7 +87,7 @@
     </span>
     <span class="launcher-text">
       <span class="launcher-title">Talk to our Project Guide</span>
-      <span class="launcher-sub">Instant answers</span>
+      <span class="launcher-sub">Friendly Instant Answers</span>
     </span>
   `;
 
