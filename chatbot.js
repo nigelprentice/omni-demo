@@ -78,8 +78,17 @@
   launcher.className = 'chat-launcher';
   launcher.setAttribute('aria-label', 'Chat with Omni project guide');
   launcher.innerHTML = `
-    <span class="pulse-dot" aria-hidden="true"></span>
-    <span>Talk to our project guide</span>
+    <span class="launcher-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z"/>
+        <path d="M19 14l.7 1.8L21.5 16.5l-1.8.7L19 19l-.7-1.8L16.5 16.5l1.8-.7L19 14z"/>
+      </svg>
+      <span class="pulse-dot" aria-hidden="true"></span>
+    </span>
+    <span class="launcher-text">
+      <span class="launcher-title">Talk to our Project Guide</span>
+      <span class="launcher-sub">Instant answers</span>
+    </span>
   `;
 
   const panel = document.createElement('div');
@@ -1105,13 +1114,19 @@
     inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
   });
 
-  // ----- AUTO-PROMPT (subtle nudge after 12s scrolled) --------------
+  // ----- AUTO-PROMPT (subtle nudge after the visitor scrolls into the page) --------------
   let nudged = false;
   window.addEventListener('scroll', () => {
     if (nudged) return;
     if (window.scrollY > 600) {
       nudged = true;
-      launcher.style.animation = 'pulse 0.6s ease-out 2';
+      launcher.classList.add('is-nudging');
+      launcher.addEventListener('animationend', function onEnd(e) {
+        if (e.animationName === 'launcherNudge') {
+          launcher.classList.remove('is-nudging');
+          launcher.removeEventListener('animationend', onEnd);
+        }
+      });
     }
   }, { passive: true });
 })();
