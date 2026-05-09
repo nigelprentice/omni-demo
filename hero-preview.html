@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hero candidate preview — Omni Design and Build</title>
+    <meta name="description" content="Side-by-side preview of homepage hero candidates rendered with the live site styles." />
+    <link rel="icon" href="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230A0B0D'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%235BC8E8' stroke-width='4'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Preview-only chrome — keeps the page itself out of the way so each hero
+         renders exactly like the real homepage hero. */
+      .preview-label {
+        background: #0A0B0D;
+        color: #fff;
+        padding: 18px 0;
+        border-top: 1px solid rgba(255,255,255,0.08);
+      }
+      .preview-label .container { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+      .preview-label .pl-tag {
+        display: inline-block;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: #5BC8E8;
+        font-weight: 600;
+      }
+      .preview-label h2 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+      }
+      .preview-label .pl-meta {
+        font-size: 13px;
+        color: rgba(255,255,255,0.6);
+      }
+      .preview-intro {
+        background: #0A0B0D;
+        color: #fff;
+        padding: 64px 0 32px;
+      }
+      .preview-intro h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        font-weight: 600;
+      }
+      .preview-intro p {
+        margin: 0;
+        font-size: 15px;
+        color: rgba(255,255,255,0.7);
+        max-width: 64ch;
+      }
+      /* Each hero needs to size like it does on the homepage. The .hero rule in
+         styles.css already handles that — no override here. */
+    </style>
+  </head>
+  <body>
+
+    <!-- ============================================================
+         HEADER — same as homepage so each hero sits under the real chrome
+         ============================================================ -->
+    <header class="site-header is-scrolled" id="siteHeader">
+      <div class="container header-row">
+        <a class="brand" href="index.html" aria-label="Omni Design and Build — home">
+          <img
+            src="images/omni_logo_transparent.png"
+            alt="Omni Design and Build"
+            class="brand-logo"
+            width="1420"
+            height="338"
+          />
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <a href="index.html#lanes">What we build</a>
+          <a href="index.html#credibility">Why Omni</a>
+          <a href="index.html#cta-foot">Contact</a>
+        </nav>
+        <a href="book.html" class="btn btn-cta btn-cta-sm">
+          <span class="btn-text-full">Book a 30-min consult</span>
+          <span class="btn-text-short">Book consult</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Intro strip ----------------------------------------------------- -->
+    <section class="preview-intro">
+      <div class="container">
+        <h1>Hero candidate preview</h1>
+        <p>
+          Each section below is a 1:1 render of the homepage hero — same layout,
+          same overlay, same headline — with a different candidate image behind it.
+          Scroll to compare. The current live hero is shown first as the baseline.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CURRENT — baseline
+         ============================================================ -->
+    <section class="preview-label">
+      <div class="container">
+        <span class="pl-tag">Current</span>
+        <h2>hero.jpg — live site baseline</h2>
+        <span class="pl-meta">The hero presently in production on index.html.</span>
+      </div>
+    </section>
+    <section class="hero" aria-label="Current hero — baseline">
+      <div class="hero-bg">
+        <picture>
+          <img src="images/hero.jpg" alt="Current homepage hero" loading="eager" fetchpriority="high" />
+        </picture>
+        <div class="hero-bg-shade" aria-hidden="true"></div>
+      </div>
+      <div class="container hero-inner">
+        <div class="hero-eyebrow"><span class="eyebrow">AUSTIN &amp; THE HILL COUNTRY</span></div>
+        <h1 class="hero-h1">
+          Design, engineer, and build —<br /><span class="cyan">all in one house.</span>
+        </h1>
+        <p class="hero-sub">
+          Hill Country additions, renovations, and custom homes — from first sketch to
+          final walk-through, by a single team. No architect referral chase.
+        </p>
+        <div class="hero-actions">
+          <a href="book.html" class="btn btn-cta">Book a 30-min design consult</a>
+          <a href="index.html#lanes" class="btn btn-ghost">See what we build →</a>
+        </div>
+        <ul class="hero-meta" role="list">
+          <li><span class="dot" aria-hidden="true"></span>In-house design + engineering</li>
+          <li><span class="dot" aria-hidden="true"></span>Quotes delivered fast</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CANDIDATE 1 — Justin Wolff
+         ============================================================ -->
+    <section class="preview-label">
+      <div class="container">
+        <span class="pl-tag">Candidate 1</span>
+        <h2>Justin Wolff — limestone &amp; stone facade at sunset</h2>
+        <span class="pl-meta">Hill-Country-leaning materials, peach sky, photography (not render).</span>
+      </div>
+    </section>
+    <section class="hero" aria-label="Candidate 1 — Justin Wolff">
+      <div class="hero-bg">
+        <picture>
+          <img src="../Site%20Build%20Files/hero%20images/justin-wolff-7qD-iDyrdHY-unsplash.jpg" alt="Modern luxury home with limestone and stone facade at sunset" loading="lazy" />
+        </picture>
+        <div class="hero-bg-shade" aria-hidden="true"></div>
+      </div>
+      <div class="container hero-inner">
+        <div class="hero-eyebrow"><span class="eyebrow">AUSTIN &amp; THE HILL COUNTRY</span></div>
+        <h1 class="hero-h1">
+          Design, engineer, and build —<br /><span class="cyan">all in one house.</span>
+        </h1>
+        <p class="hero-sub">
+          Hill Country additions, renovations, and custom homes — from first sketch to
+          final walk-through, by a single team. No architect referral chase.
+        </p>
+        <div class="hero-actions">
+          <a href="book.html" class="btn btn-cta">Book a 30-min design consult</a>
+          <a href="index.html#lanes" class="btn btn-ghost">See what we build →</a>
+        </div>
+        <ul class="hero-meta" role="list">
+          <li><span class="dot" aria-hidden="true"></span>In-house design + engineering</li>
+          <li><span class="dot" aria-hidden="true"></span>Quotes delivered fast</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CANDIDATE 2 — Michael Brown
+         ============================================================ -->
+    <section class="preview-label">
+      <div class="container">
+        <span class="pl-tag">Candidate 2</span>
+        <h2>Michael Brown — modern luxury home with large windows at dusk</h2>
+        <span class="pl-meta">Glowing interior, magazine-grade architectural photography.</span>
+      </div>
+    </section>
+    <section class="hero" aria-label="Candidate 2 — Michael Brown">
+      <div class="hero-bg">
+        <picture>
+          <img src="../Site%20Build%20Files/hero%20images/michael-brown-G48h926L2qo-unsplash.jpg" alt="Modern luxury home with large illuminated windows at dusk" loading="lazy" />
+        </picture>
+        <div class="hero-bg-shade" aria-hidden="true"></div>
+      </div>
+      <div class="container hero-inner">
+        <div class="hero-eyebrow"><span class="eyebrow">AUSTIN &amp; THE HILL COUNTRY</span></div>
+        <h1 class="hero-h1">
+          Design, engineer, and build —<br /><span class="cyan">all in one house.</span>
+        </h1>
+        <p class="hero-sub">
+          Hill Country additions, renovations, and custom homes — from first sketch to
+          final walk-through, by a single team. No architect referral chase.
+        </p>
+        <div class="hero-actions">
+          <a href="book.html" class="btn btn-cta">Book a 30-min design consult</a>
+          <a href="index.html#lanes" class="btn btn-ghost">See what we build →</a>
+        </div>
+        <ul class="hero-meta" role="list">
+          <li><span class="dot" aria-hidden="true"></span>In-house design + engineering</li>
+          <li><span class="dot" aria-hidden="true"></span>Quotes delivered fast</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CANDIDATE 3 — Diego Marin
+         ============================================================ -->
+    <section class="preview-label">
+      <div class="container">
+        <span class="pl-tag">Candidate 3</span>
+        <h2>Diego Marin — modern home with plunge pool at night</h2>
+        <span class="pl-meta">Moody, low-light. Watch how the headline reads over the dark frame.</span>
+      </div>
+    </section>
+    <section class="hero" aria-label="Candidate 3 — Diego Marin">
+      <div class="hero-bg">
+        <picture>
+          <img src="../Site%20Build%20Files/hero%20images/diego-marin-eG3YGzIPjjg-unsplash.jpg" alt="Modern home with plunge pool and warm interior light at night" loading="lazy" />
+        </picture>
+        <div class="hero-bg-shade" aria-hidden="true"></div>
+      </div>
+      <div class="container hero-inner">
+        <div class="hero-eyebrow"><span class="eyebrow">AUSTIN &amp; THE HILL COUNTRY</span></div>
+        <h1 class="hero-h1">
+          Design, engineer, and build —<br /><span class="cyan">all in one house.</span>
+        </h1>
+        <p class="hero-sub">
+          Hill Country additions, renovations, and custom homes — from first sketch to
+          final walk-through, by a single team. No architect referral chase.
+        </p>
+        <div class="hero-actions">
+          <a href="book.html" class="btn btn-cta">Book a 30-min design consult</a>
+          <a href="index.html#lanes" class="btn btn-ghost">See what we build →</a>
+        </div>
+        <ul class="hero-meta" role="list">
+          <li><span class="dot" aria-hidden="true"></span>In-house design + engineering</li>
+          <li><span class="dot" aria-hidden="true"></span>Quotes delivered fast</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CANDIDATE 4 — Walter
+         ============================================================ -->
+    <section class="preview-label">
+      <div class="container">
+        <span class="pl-tag">Candidate 4</span>
+        <h2>Walter — modern two-story home with balconies (3D render)</h2>
+        <span class="pl-meta">Reads as CGI rather than photography — flagging for review.</span>
+      </div>
+    </section>
+    <section class="hero" aria-label="Candidate 4 — Walter">
+      <div class="hero-bg">
+        <picture>
+          <img src="../Site%20Build%20Files/hero%20images/walter-EZI7eC-od_U-unsplash.jpg" alt="Modern two-story home with balconies (3D render)" loading="lazy" />
+        </picture>
+        <div class="hero-bg-shade" aria-hidden="true"></div>
+      </div>
+      <div class="container hero-inner">
+        <div class="hero-eyebrow"><span class="eyebrow">AUSTIN &amp; THE HILL COUNTRY</span></div>
+        <h1 class="hero-h1">
+          Design, engineer, and build —<br /><span class="cyan">all in one house.</span>
+        </h1>
+        <p class="hero-sub">
+          Hill Country additions, renovations, and custom homes — from first sketch to
+          final walk-through, by a single team. No architect referral chase.
+        </p>
+        <div class="hero-actions">
+          <a href="book.html" class="btn btn-cta">Book a 30-min design consult</a>
+          <a href="index.html#lanes" class="btn btn-ghost">See what we build →</a>
+        </div>
+        <ul class="hero-meta" role="list">
+          <li><span class="dot" aria-hidden="true"></span>In-house design + engineering</li>
+          <li><span class="dot" aria-hidden="true"></span>Quotes delivered fast</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CANDIDATE 5 — Willian Reis
+         ============================================================ -->
+    <section class="preview-label">
+      <div class="container">
+        <span class="pl-tag">Candidate 5</span>
+        <h2>Willian Reis — modern white cubic home, daylight (3D render)</h2>
+        <span class="pl-meta">Reads as CGI and tropical landscaping — flagging for review.</span>
+      </div>
+    </section>
+    <section class="hero" aria-label="Candidate 5 — Willian Reis">
+      <div class="hero-bg">
+        <picture>
+          <img src="../Site%20Build%20Files/hero%20images/willian-reis-JwSo36TmqFA-unsplash.jpg" alt="Modern white cubic home with tropical landscaping (3D render)" loading="lazy" />
+        </picture>
+        <div class="hero-bg-shade" aria-hidden="true"></div>
+      </div>
+      <div class="container hero-inner">
+        <div class="hero-eyebrow"><span class="eyebrow">AUSTIN &amp; THE HILL COUNTRY</span></div>
+        <h1 class="hero-h1">
+          Design, engineer, and build —<br /><span class="cyan">all in one house.</span>
+        </h1>
+        <p class="hero-sub">
+          Hill Country additions, renovations, and custom homes — from first sketch to
+          final walk-through, by a single team. No architect referral chase.
+        </p>
+        <div class="hero-actions">
+          <a href="book.html" class="btn btn-cta">Book a 30-min design consult</a>
+          <a href="index.html#lanes" class="btn btn-ghost">See what we build →</a>
+        </div>
+        <ul class="hero-meta" role="list">
+          <li><span class="dot" aria-hidden="true"></span>In-house design + engineering</li>
+          <li><span class="dot" aria-hidden="true"></span>Quotes delivered fast</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer thin strip ----------------------------------------------- -->
+    <section class="preview-intro" style="padding: 48px 0 64px;">
+      <div class="container">
+        <p>
+          Once you pick one, tell me which candidate to use as the new hero and I'll
+          do the file swap on hero.jpg + alt-text updates across index.html and
+          lanes/custom-builds.html.
+        </p>
+      </div>
+    </section>
+
+  </body>
+</html>
